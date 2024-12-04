@@ -10,14 +10,13 @@ class ImageProviderModel extends ChangeNotifier {
 
   List<dynamic> get images => _images;
 
-  // Public getter for `_isLoading`
   bool get isLoading => _isLoading;
 
   Future<void> fetchImages() async {
     if (_isLoading) return;
 
     _isLoading = true;
-    notifyListeners(); // Notify listeners that loading has started
+    notifyListeners();
 
     final url = Uri.parse('$_baseUrl?page=$_page&limit=15');
 
@@ -31,7 +30,7 @@ class ImageProviderModel extends ChangeNotifier {
         print('Response data: $data');
         _images.addAll(data['photos']);
         _page++;
-        notifyListeners(); // Notify listeners about new images
+        notifyListeners();
       } else {
         print('Error: ${response.statusCode}, ${response.body}');
         throw Exception('Failed to load images');
@@ -40,7 +39,7 @@ class ImageProviderModel extends ChangeNotifier {
       print('Exception occurred: $e');
     } finally {
       _isLoading = false;
-      notifyListeners(); // Notify listeners that loading has stopped
+      notifyListeners();
     }
   }
 }

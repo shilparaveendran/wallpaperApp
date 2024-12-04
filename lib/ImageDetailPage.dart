@@ -22,15 +22,13 @@ class ImageDetailPage extends StatelessWidget {
     }
 
     try {
-      // Save to public Pictures directory
       final directory = Directory('/storage/emulated/0/Pictures'); // Pictures directory
       if (!await directory.exists()) {
-        await directory.create(recursive: true); // Create the directory if it doesn't exist
+        await directory.create(recursive: true);
       }
 
       final filePath = '${directory.path}/wallpaper_${DateTime.now().millisecondsSinceEpoch}.jpg';
 
-      // Download image
       final dio = Dio();
       await dio.download(imageUrl, filePath);
 
@@ -55,15 +53,15 @@ class ImageDetailPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: SizedBox(
-                height: 500, // Set the desired height
-                width: double.infinity, // Set to screen width or a fixed value
+                height: 500,
+                width: double.infinity,
                 child: Image.network(
                   imageUrl,
-                  fit: BoxFit.cover, // Adjust image to fit the box
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-            const SizedBox(height: 20), // Add spacing between the image and button
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: SizedBox(

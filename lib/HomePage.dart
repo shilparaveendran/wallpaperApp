@@ -15,7 +15,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // Trigger fetching images when the screen is opened
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<ImageProviderModel>(context, listen: false).fetchImages();
     });
@@ -55,9 +54,9 @@ class _HomePageState extends State<HomePage> {
               color: Colors.black,
               border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
             ),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 Text(
                   'Activity',
                   style: TextStyle(color: Colors.grey),
@@ -116,14 +115,13 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: MasonryGridView.builder(
                     padding: const EdgeInsets.all(10),
-                    itemCount: provider.images.length + 1, // Add 1 for the loader
+                    itemCount: provider.images.length + 1,
                     gridDelegate:
                     const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                     ),
                     itemBuilder: (context, index) {
                       if (index == provider.images.length) {
-                        // Show a loading indicator after the last item
                         return provider.isLoading
                             ? const Center(
                           child: Padding(
@@ -160,9 +158,9 @@ class _HomePageState extends State<HomePage> {
                           fit: BoxFit.cover,
                           width: double.infinity,
                           height: 250,
-                          placeholderFit: BoxFit.contain, // Ensure the placeholder fits nicely
+                          placeholderFit: BoxFit.contain,
                           imageErrorBuilder: (context, error, stackTrace) {
-                            return const Icon(Icons.error, size: 250); // Handle failed images
+                            return const Icon(Icons.error, size: 250);
                           },
                         ),
 
